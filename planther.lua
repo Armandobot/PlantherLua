@@ -56,7 +56,7 @@ do
 local planther_INFO = {
 id_por = ]] .. redis:get(fuck .. "id_por") .. [[,
 UserName_planther = "]] .. redis:get(fuck .. "User_Devplanther1") .. [[",
-id_por = "]] .. redis:get(fuck .. "Token_Devplanther") .. [["
+token = "]] .. redis:get(fuck .. "Token_Devplanther") .. [["
 }
 return planther_INFO
 end
@@ -108,7 +108,7 @@ print("\27[36m" .. [[
 ]] .. '\27[m')
 -- web site : https://planther-ash.com .
 sudos = dofile("./info_bot.lua")
-token = sudos.id_por
+token = sudos.token
 UserName_Dev = sudos.UserName_planther
 bot_id = token:match("(%d+)")
 Id_Dev = sudos.id_por
