@@ -1,5 +1,3 @@
--- Hello ?. 
--- plz go fuck your self :) .
 http = require("socket.http")
 https = require("ssl.https")
 JSON = dofile("./Files/dkjson.lua")
@@ -7,32 +5,12 @@ json = dofile("./Files/JSON.lua")
 URL = dofile("./Files/url.lua")
 serpent = dofile("./Files/serpent.lua")
 redis = dofile("./Files/redis.lua").connect("127.0.0.1", 6379)
-fuck = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
---- Table with color codes
-local colorCode = {
-    black = "0;30",
-    dgrey = "1;30",
-    red = "0;31",
-    bred = "1;31",
-    green = "0;32",
-    bgreen = "1;32",
-    brown = "0;33",
-    yellow = "1;33",
-    blue = "0;34",
-    bblue = "1;34",
-    dblue = "2;34",
-    dpurple = "0;35",
-    bpurple = "1;35",
-    dcyan = "0;36",
-    cyan = "1;36",
-    bgrey = "0;37",
-    white = "1;37",
-    none = "0"
-}
-local function fuck_file()
-    local f = io.open("./info_bot.lua", "r")
+Server_planther = io.popen("echo $SSH_CLIENT | awk '{ print $1}'"):read('*a')
+------------------------------------------------------------------------------------------------------------
+local function Load_File()
+    local f = io.open("./Info_Sudo.lua", "r")
     if not f then
-        if not redis:get(fuck .. "t_planther") then
+        if not redis:get(Server_planther .. "Token_Devplanther") then
             io.write('\n\27[1;35m⌔︙Send Token For Bot : ارسل توكن البوت ...\n\27[0;39;49m')
             local token = io.read()
             if token ~= '' then
@@ -42,26 +20,26 @@ local function fuck_file()
                         '\n\27[1;31m⌔︙Token Is Communication Error\n التوكن غلط جرب مره اخره \n\27[0;39;49m')
                 else
                     io.write('\n\27[1;31m⌔︙Done Save Token : تم حفظ التوكن \n\27[0;39;49m')
-                    redis:set(fuck .. "t_planther", token)
+                    redis:set(Server_planther .. "Token_Devplanther", token)
                 end
             else
                 io.write('\n\27[1;31m⌔︙Token was not saved \n لم يتم حفظ التوكن \n\27[0;39;49m')
             end
             os.execute('lua planther.lua')
         end
-        -- go fuck your self :) .
-        if not redis:get(fuck .. "User_Devplanther1") then
+        ------------------------------------------------------------------------------------------------------------
+        if not redis:get(Server_planther .. "User_Devplanther1") then
             io.write(
                 '\n\27[1;35m⌔︙Send ID For Sudo : ارسل ايدي المطور الاساسي ...\n\27[0;39;49m')
             local User_Sudo = io.read():gsub('@', '')
             if User_Sudo ~= '' then
                 io.write('\n\27[1;31m⌔︙The ID Is Saved : تم حفظ ايدي المطور\n\27[0;39;49m')
-                redis:set(fuck .. "Id_Devplanther", User_Sudo)
+                redis:set(Server_planther .. "Id_Devplanther", User_Sudo)
                 io.write(
                     '\n\27[1;35m⌔︙Send UserName For Sudo : ارسل معرف المطور الاساسي ...\n\27[0;39;49m')
                 local User_Sudo2 = io.read():gsub('@', '')
                 if User_Sudo ~= '' then
-                    redis:set(fuck .. "User_Devplanther1", User_Sudo2)
+                    redis:set(Server_planther .. "User_Devplanther1", User_Sudo2)
                 end
             else
                 io.write(
@@ -69,34 +47,34 @@ local function fuck_file()
             end
             os.execute('lua planther.lua')
         end
-        -- go fuck your self :) .
-        local Devplanther_Info_Sudo = io.open("info_bot.lua", 'w')
-Devplanther_Info_Sudo:write([[
+        ------------------------------------------------------------------------------------------------------------
+        local Devplanther_Info_Sudo = io.open("Info_Sudo.lua", 'w')
+        Devplanther_Info_Sudo:write([[
 do 
 local planther_INFO = {
-Id_Devplanther = ]]..redis:get(fuck.."Id_Devplanther")..[[,
-UserName_planther = "]]..redis:get(fuck.."u_planther")..[[",
-Token_Bot = "]]..redis:get(fuck.."t_planther")..[["
+Id_Devplanther = ]] .. redis:get(Server_planther .. "Id_Devplanther") .. [[,
+UserName_planther = "]] .. redis:get(Server_planther .. "User_Devplanther1") .. [[",
+Token_Bot = "]] .. redis:get(Server_planther .. "Token_Devplanther") .. [["
 }
 return planther_INFO
 end
 
 ]])
-        Devplanther_info_bot:close()
-        -- go fuck your self :) .
+        Devplanther_Info_Sudo:close()
+        ------------------------------------------------------------------------------------------------------------
         local Run_File_planther = io.open("planther", 'w')
         Run_File_planther:write([[
 #!/usr/bin/env bash
 cd $HOME/planther
-token="]] .. redis:get(fuck .. "t_planther") .. [["
+token="]] .. redis:get(Server_planther .. "Token_Devplanther") .. [["
 while(true) do
 rm -fr ../.telegram-cli
 ./tg -s ./planther.lua -p PROFILE --bot=$token
 done
 ]])
         Run_File_planther:close()
-        -- go fuck your self :) .
-        local Run_SM = io.open("AsH", 'w')
+        ------------------------------------------------------------------------------------------------------------
+        local Run_SM = io.open("tk", 'w')
         Run_SM:write([[
 #!/usr/bin/env bash
 cd $HOME/planther
@@ -110,47 +88,31 @@ done
         io.popen("mkdir Files")
         os.execute('chmod +x tg')
         os.execute('chmod +x planther')
-        os.execute('chmod +x AsH')
-        os.execute('./AsH')
+        os.execute('chmod +x tk')
+        os.execute('./tk')
         Status = true
     else
         f:close()
-        redis:del(fuck .. "t_planther");
-        redis:del(fuck .. "Id_Devplanther");
-        redis:del(fuck .. "User_Devplanther1")
+        redis:del(Server_planther .. "Token_Devplanther");
+        redis:del(Server_planther .. "Id_Devplanther");
+        redis:del(Server_planther .. "User_Devplanther1")
         Status = false
     end
     return Status
 end
-fuck_file()
-
-print("\27[36m" .. [[   
-                    
-    /$$$$$$$    /$$          /$$$$$$  /$$   /$$  
-    | $$  \ $$ | $$         /$$__  $$ | $$$ | $$ 
-    | $$$$$$$/ | $$        | $$  \ $$ | $$$$| $$       
-    | $$____/  | $$        | $$$$$$$$ | $$ $$ $$       
-    | $$       | $$        | $$__  $$ | $$  $$$$       
-    | $$       | $$        | $$  | $$ | $$\  $$$       
-    | $$       | $$$$$$$$  | $$  | $$ | $$ \  $$       
-    |__/       |________/  |__/  |__/ |__/  \__/       
-
-- lua project to install telegram bot.
-
-- He did this work : https://t.me/planther . 
-
-- web site : https://planther-ash.com .
+Load_File()
+print("\27[36m" .. [[                                           
 
 ]] .. '\27[m')
--- go fuck your self :) .
-sudos = dofile("./info_bot.lua")
+------------------------------------------------------------------------------------------------------------
+sudos = dofile("./Info_Sudo.lua")
 token = sudos.Token_Bot
 UserName_Dev = sudos.UserName_planther
 bot_id = token:match("(%d+)")
 Id_Dev = sudos.Id_Devplanther
 Ids_Dev = {sudos.Id_Devplanther, bot_id}
-Name_Bot = redis:get(bot_id .. "Redis:Name:Bot") or "بلانثر"
--- go fuck your self :) .
+Name_Bot = redis:get(bot_id .. "Redis:Name:Bot") or "تيكتوك"
+------------------------------------------------------------------------------------------------------------
 function var(value)
     print(serpent.block(value, {
         comment = false
@@ -159,7 +121,7 @@ end
 function dl_cb(arg, data)
     -- var(data)  
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Dev_planther(msg)
     local Dev_planther = false
     for k, v in pairs(Ids_Dev) do
@@ -245,10 +207,16 @@ function Vips(msg)
     end
 end
 function AddChannel(User)
-    Var = true
+    local url, res = https.request('https://khaled.mo-0hammed.com/api/index.php/?id=' .. User .. '') --- Developer :- @LGlobla 
+    data = JSON.decode(url)
+    if data.Ch_Member.b666p ~= true then
+        Var = false
+    else
+        Var = true
+    end
     return Var
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Rank_Checking(user_id, chat_id)
     if Dev_planther_User(user_id) then
         Status = true
@@ -273,7 +241,7 @@ function Rank_Checking(user_id, chat_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Get_Rank(user_id, chat_id)
     if Dev_planther_User(user_id) == true then
         Status = "المطور الاساسي"
@@ -306,7 +274,7 @@ function Get_Rank(user_id, chat_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function ChekBotAdd(chat_id)
     if redis:sismember(bot_id .. "ChekBotAdd", chat_id) then
         Status = true
@@ -315,7 +283,7 @@ function ChekBotAdd(chat_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function MutedGroups(Chat_id, User_id)
     if redis:sismember(bot_id .. "Silence:User:Group" .. Chat_id, User_id) then
         Status = true
@@ -324,7 +292,7 @@ function MutedGroups(Chat_id, User_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function RemovalUserGroup(Chat_id, User_id)
     if redis:sismember(bot_id .. "Removal:User:Group" .. Chat_id, User_id) then
         Status = true
@@ -333,7 +301,7 @@ function RemovalUserGroup(Chat_id, User_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function RemovalUserGroups(User_id)
     if redis:sismember(bot_id .. "Removal:User:Groups", User_id) then
         Status = true
@@ -342,7 +310,7 @@ function RemovalUserGroups(User_id)
     end
     return Status
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function send(chat_id, reply_to_message_id, text)
     local TextParseMode = {
         ID = "TextParseModeMarkdown"
@@ -364,7 +332,7 @@ function send(chat_id, reply_to_message_id, text)
         }
     }, dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Delete_Message(chat, id)
     pcall(tdcli_function({
         ID = "DeleteMessages",
@@ -373,7 +341,7 @@ function Delete_Message(chat, id)
     }, function(arg, data)
     end, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function DeleteMessage_(chat, id, func)
     pcall(tdcli_function({
         ID = "DeleteMessages",
@@ -381,7 +349,7 @@ function DeleteMessage_(chat, id, func)
         message_ids_ = id
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function getInputFile(file)
     if file:match("/") then
         infile = {
@@ -401,12 +369,12 @@ function getInputFile(file)
     end
     return infile
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function RestrictChat(User_id, Chat_id)
     https.request("https://api.telegram.org/bot" .. token .. "/restrictChatMember?chat_id=" .. Chat_id .. "&user_id=" ..
                       User_id)
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Get_Api(Info_Web)
     local Info, Res = https.request(Info_Web)
     local Req = json:decode(Info)
@@ -418,7 +386,7 @@ function Get_Api(Info_Web)
     end
     return Req
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendText(chat_id, text, reply_to_message_id, markdown)
     Status_Api = "https://api.telegram.org/bot" .. token
     local Url_Api = Status_Api .. "/sendMessage?chat_id=" .. chat_id .. "&text=" .. URL.escape(text)
@@ -432,7 +400,7 @@ function sendText(chat_id, text, reply_to_message_id, markdown)
     end
     return Get_Api(Url_Api)
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function send_inline_keyboard(chat_id, text, keyboard, inline, reply_id)
     local response = {}
     response.keyboard = keyboard
@@ -448,7 +416,7 @@ function send_inline_keyboard(chat_id, text, keyboard, inline, reply_id)
     end
     return Get_Api(Status_Api)
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function GetInputFile(file)
     local file = file or ""
     if file:match("/") then
@@ -469,7 +437,7 @@ function GetInputFile(file)
     end
     return infile
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendPhoto(chat_id, reply_id, photo, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -488,7 +456,7 @@ function sendPhoto(chat_id, reply_id, photo, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendVoice(chat_id, reply_id, voice, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -506,7 +474,7 @@ function sendVoice(chat_id, reply_id, voice, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendAnimation(chat_id, reply_id, animation, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -524,7 +492,7 @@ function sendAnimation(chat_id, reply_id, animation, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendAudio(chat_id, reply_id, audio, title, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -543,7 +511,7 @@ function sendAudio(chat_id, reply_id, audio, title, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendSticker(chat_id, reply_id, sticker, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -560,7 +528,7 @@ function sendSticker(chat_id, reply_id, sticker, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function tdcli_update_callback_value(Data)
     url = 'https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua'
     file_path = 'planther.lua'
@@ -584,7 +552,7 @@ function tdcli_update_callback_value(Data)
     file:close()
     return file_path, code
 end
--- go fuck your self :) . 
+------------------------------------------------------------------------------------------------------------ 
 function tdcli_update_callback_value_(Data)
     tdcli_update_callback_value(Data)
     url = 'https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua'
@@ -609,7 +577,7 @@ function tdcli_update_callback_value_(Data)
     file:close()
     return file_path, code
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendVideo(chat_id, reply_id, video, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -629,7 +597,7 @@ function sendVideo(chat_id, reply_id, video, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function sendDocument(chat_id, reply_id, document, caption, func)
     pcall(tdcli_function({
         ID = "SendMessage",
@@ -645,7 +613,7 @@ function sendDocument(chat_id, reply_id, document, caption, func)
         }
     }, func or dl_cb, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function KickGroup(chat, user)
     pcall(tdcli_function({
         ID = "ChangeChatMemberStatus",
@@ -657,14 +625,14 @@ function KickGroup(chat, user)
     }, function(arg, data)
     end, nil))
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Send_Options(msg, user_id, status, text)
     tdcli_function({
         ID = "GetUser",
         user_id_ = user_id
     }, function(arg, data)
         if data.first_name_ ~= false then
-            local UserName = (data.username_ or "planthertech")
+            local UserName = (data.username_ or "b666P")
             for gmatch in string.gmatch(data.first_name_, "[^%s]+") do
                 data.first_name_ = gmatch or 'planther'
             end
@@ -717,7 +685,7 @@ function Send_Optionspv(chat, idmsg, user_id, status, text)
         user_id_ = user_id
     }, function(arg, data)
         if data.first_name_ ~= false then
-            local UserName = (data.username_ or "planthertech")
+            local UserName = (data.username_ or "b666P")
             for gmatch in string.gmatch(data.first_name_, "[^%s]+") do
                 data.first_name_ = gmatch
             end
@@ -731,7 +699,7 @@ function Send_Optionspv(chat, idmsg, user_id, status, text)
         end
     end, nil)
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Total_message(Message)
     local MsgText = ''
     if tonumber(Message) < 100 then
@@ -763,7 +731,7 @@ function Total_message(Message)
     end
     return MsgText
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function download_to_file(url, file_path)
     local respbody = {}
     local options = {
@@ -785,7 +753,7 @@ function download_to_file(url, file_path)
     file:close()
     return file_path, code
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function NotSpam(msg, Type)
     if Type == "kick" then
         Send_Options(msg, msg.sender_user_id_, "reply", "⌔︙قام بالتكرار هنا وتم طرده")
@@ -811,7 +779,7 @@ function NotSpam(msg, Type)
         return false
     end
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Filesplanther(msg)
     File_Bot = dofile("planther.lua")
     if File_Bot.planther and msg then
@@ -836,6 +804,10 @@ function SetFile_Groups(msg, chat, File_id, JsonFile)
         send(chat, msg.id_, "*⌔︙عذرا الملف ليس بصيغة ال : Json*")
         return false
     end
+    -- if tonumber(JsonFile:match('(%d+)')) ~= tonumber(bot_id) then 
+    -- send(chat,msg.id_,"⌔︙الملف لا يتوافق مع البوت يرجى رفع ملف نسخة الكروبات الحقيفي")   
+    -- return false 
+    -- end      
     local File = json:decode(https.request('https://api.telegram.org/bot' .. token .. '/getfile?file_id=' .. File_id))
     download_to_file('https://api.telegram.org/file/bot' .. token .. '/' .. File.result.file_path, '' .. JsonFile)
     send(chat, msg.id_, "⌔︙جاري بدء رفع الكروبات وتحويل الخزن ...")
@@ -937,7 +909,7 @@ function SetFile_Groups(msg, chat, File_id, JsonFile)
     send(chat, msg.id_,
         "⌔︙تم رفع ملف الخزن بنجاح\n⌔︙تم استرجاع جميع الكروبات ورفع المنشئين والمدراء في البوت")
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 function Dev_planther_File(msg, data)
     if msg then
         msg = data.message_
@@ -1085,7 +1057,7 @@ function Dev_planther_File(msg, data)
             end
             return vipss
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if msg.chat_id_ then
             local id = tostring(msg.chat_id_)
             if id:match("-100(%d+)") then
@@ -1098,14 +1070,14 @@ function Dev_planther_File(msg, data)
                 TypeForChat = 'ForGroup'
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Status:Lock:text" .. msg.chat_id_) and not Vips(msg) then
             Delete_Message(msg.chat_id_, {
                 [0] = msg.id_
             })
             return false
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatAddMembers" then
             redis:incr(bot_id .. "Num:Add:Memp" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
         end
@@ -1117,14 +1089,14 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageChatJoinByLink" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Join" .. msg.chat_id_) == "kick" then
                 KickGroup(msg.chat_id_, msg.sender_user_id_)
                 return false
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("@[%a%d_]+") or msg.content_.caption_:match("@(.+)") then
                 if redis:get(bot_id .. "Status:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
@@ -1149,7 +1121,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if text and text:match("@[%a%d_]+") or text and text:match("@(.+)") then
             if redis:get(bot_id .. "Status:Lock:User:Name" .. msg.chat_id_) == "del" and not Vips(msg) then
                 Delete_Message(msg.chat_id_, {
@@ -1172,7 +1144,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("#[%a%d_]+") or msg.content_.caption_:match("#(.+)") then
                 if redis:get(bot_id .. "Status:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
@@ -1197,7 +1169,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if text and text:match("#[%a%d_]+") or text and text:match("#(.+)") then
             if redis:get(bot_id .. "Status:Lock:hashtak" .. msg.chat_id_) == "del" and not Vips(msg) then
                 Delete_Message(msg.chat_id_, {
@@ -1220,7 +1192,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if msg.content_.caption_:match("/[%a%d_]+") or msg.content_.caption_:match("/(.+)") then
                 if redis:get(bot_id .. "Status:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
@@ -1245,7 +1217,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if text and text:match("/[%a%d_]+") or text and text:match("/(.+)") then
             if redis:get(bot_id .. "Status:Lock:Cmd" .. msg.chat_id_) == "del" and not Vips(msg) then
                 Delete_Message(msg.chat_id_, {
@@ -1268,7 +1240,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.caption_ then
             if not Vips(msg) then
                 if msg.content_.caption_:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]/") or
@@ -1303,7 +1275,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if text and text:match("[Tt][Ee][Ll][Ee][Gg][Rr][Aa][Mm].[Mm][Ee]/") or text and
             text:match("[Hh][Tt][Tt][Pp][Ss]://") or text and text:match("[Hh][Tt][Tt][Pp]://") or text and
             text:match("[Ww][Ww][Ww].") or text and text:match(".[Cc][Oo][Mm]") or text and
@@ -1331,7 +1303,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessagePhoto" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Photo" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1354,7 +1326,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageVideo" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Video" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1377,7 +1349,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageAnimation" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Animation" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1400,7 +1372,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.game_ and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:geam" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1423,7 +1395,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageAudio" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Audio" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1446,7 +1418,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageVoice" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:vico" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1469,7 +1441,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.reply_markup_ and msg.reply_markup_.ID == "ReplyMarkupInlineKeyboard" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Keyboard" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1492,7 +1464,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageSticker" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Sticker" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1515,7 +1487,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.forward_info_ and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:forward" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1542,7 +1514,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageDocument" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Document" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1565,7 +1537,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageUnsupported" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Unsupported" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1588,7 +1560,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.entities_ then
             if msg.content_.entities_[0] then
                 if msg.content_.entities_[0] and msg.content_.entities_[0].ID == "MessageEntityUrl" or
@@ -1641,7 +1613,7 @@ function Dev_planther_File(msg, data)
                 })
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID == "MessageContact" and not Vips(msg) then
             if redis:get(bot_id .. "Status:Lock:Contact" .. msg.chat_id_) == "del" then
                 Delete_Message(msg.chat_id_, {
@@ -1665,7 +1637,7 @@ function Dev_planther_File(msg, data)
             end
         end
 
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.text_ then
             local _nl, ctrl_ = string.gsub(text, "%c", "")
             local _nl, real_ = string.gsub(text, "%d", "")
@@ -1721,7 +1693,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
 
         if msg.content_.ID == "MessageChatJoinByLink" then
             if tonumber(msg.sender_user_id_) == tonumber(399545418) then
@@ -1775,7 +1747,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.ID ~= "MessageChatAddMembers" and
             redis:hget(bot_id .. "Spam:Group:User" .. msg.chat_id_, "Spam:User") and not Vips(msg) then
             if msg.sender_user_id_ ~= bot_id and not Vips(msg) then
@@ -1802,7 +1774,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if msg.content_.photo_ then
             if redis:get(bot_id .. "Set:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
                 if msg.content_.photo_.sizes_[3] then
@@ -1832,7 +1804,7 @@ function Dev_planther_File(msg, data)
                 redis:del(bot_id .. "Set:Chat:Photo" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Broadcasting:Groups:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء الاذاعه للمجموعات")
@@ -1871,7 +1843,7 @@ function Dev_planther_File(msg, data)
             redis:del(bot_id .. "Broadcasting:Groups:Pin" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Broadcasting:Users" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء الاذاعه خاص")
@@ -1906,7 +1878,7 @@ function Dev_planther_File(msg, data)
             redis:del(bot_id .. "Broadcasting:Users" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Broadcasting:Groups" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء الاذاعه للمجموعات")
@@ -1941,7 +1913,7 @@ function Dev_planther_File(msg, data)
             redis:del(bot_id .. "Broadcasting:Groups" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Broadcasting:Groups:Fwd" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء الاذاعه بالتوجيه للمجموعات")
@@ -1969,7 +1941,7 @@ function Dev_planther_File(msg, data)
             end
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Broadcasting:Users:Fwd" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء الاذاعه بالترجيه خاص")
@@ -1997,7 +1969,7 @@ function Dev_planther_File(msg, data)
             end
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Change:Description" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر تغير وصف المجموعه")
@@ -2010,7 +1982,7 @@ function Dev_planther_File(msg, data)
             send(msg.chat_id_, msg.id_, "⌔︙تم تغيير وصف المجموعه")
             return false
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Welcome:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر حفظ الترحيب")
@@ -2022,7 +1994,7 @@ function Dev_planther_File(msg, data)
             send(msg.chat_id_, msg.id_, "⌔︙تم حفظ ترحيب المجموعه")
             return false
         end
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Status:link:set" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر حفظ الرابط")
@@ -2039,7 +2011,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and not Vips(msg) then
             local Text_Filter = redis:get(bot_id .. "Filter:Reply2" .. text .. msg.chat_id_)
             if Text_Filter then
@@ -2050,7 +2022,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Change:Name:Bot" .. msg.sender_user_id_) then
             if text == "الغاء" or text == "الغاء ✖" then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر تغير اسم البوت")
@@ -2063,7 +2035,7 @@ function Dev_planther_File(msg, data)
             send(msg.chat_id_, msg.id_, "⌔︙ تم تغير اسم البوت الى - " .. text)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Redis:Validity:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text and text:match("^الغاء$") then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر اضافة صلاحيه")
@@ -2082,7 +2054,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Redis:Id:Group" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text == 'الغاء' then
                 send(msg.chat_id_, msg.id_, "\n⌔︙تم الغاء امر تعين الايدي")
@@ -2093,7 +2065,7 @@ function Dev_planther_File(msg, data)
             redis:set(bot_id .. "Set:Id:Group" .. msg.chat_id_, text:match("(.*)"))
             send(msg.chat_id_, msg.id_, '⌔︙تم تعين الايدي الجديد')
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Random:Sm" .. msg.chat_id_) or "") .. "" and
             not redis:get(bot_id .. "Status:Set:Sma" .. msg.chat_id_) then
             if not redis:get(bot_id .. "Status:Set:Sma" .. msg.chat_id_) then
@@ -2104,7 +2076,7 @@ function Dev_planther_File(msg, data)
             redis:set(bot_id .. "Status:Set:Sma" .. msg.chat_id_, true)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Klam:Speed" .. msg.chat_id_) or "") .. "" and
             not redis:get(bot_id .. "Status:Speed:Tr" .. msg.chat_id_) then
             if not redis:get(bot_id .. "Status:Speed:Tr" .. msg.chat_id_) then
@@ -2114,7 +2086,7 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Speed:Tr" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Klam:Hzor" .. msg.chat_id_) or "") .. "" and
             not redis:get(bot_id .. "Status:Set:Hzora" .. msg.chat_id_) then
             if not redis:get(bot_id .. "Status:Set:Hzora" .. msg.chat_id_) then
@@ -2124,7 +2096,7 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Set:Hzora" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Maany" .. msg.chat_id_) or "") .. "" and
             not redis:get(bot_id .. "Status:Set:Maany" .. msg.chat_id_) then
             if not redis:get(bot_id .. "Status:Set:Maany" .. msg.chat_id_) then
@@ -2134,7 +2106,7 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Set:Maany" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Set:Aks:Game" .. msg.chat_id_) or "") .. "" and
             not redis:get(bot_id .. "Status:Set:Aks" .. msg.chat_id_) then
             if not redis:get(bot_id .. "Status:Set:Aks" .. msg.chat_id_) then
@@ -2144,8 +2116,8 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Set:Aks" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
-        if redis:get(bot_id .. "Status:GAME:AsHMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
+        ------------------------------------------------------------------------------------------------------------
+        if redis:get(bot_id .. "Status:GAME:TKMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text and text:match("^(%d+)$") then
                 local NUM = text:match("^(%d+)$")
                 if tonumber(NUM) > 20 then
@@ -2156,7 +2128,7 @@ function Dev_planther_File(msg, data)
                 local GETNUM = redis:get(bot_id .. "Status:GAMES:NUM" .. msg.chat_id_)
                 if tonumber(NUM) == tonumber(GETNUM) then
                     redis:del(bot_id .. "Status:SADD:NUM" .. msg.chat_id_ .. msg.sender_user_id_)
-                    redis:del(bot_id .. "Status:GAME:AsHMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                    redis:del(bot_id .. "Status:GAME:TKMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                     redis:incrby(bot_id .. "Num:Add:Games" .. msg.chat_id_ .. msg.sender_user_id_, 5)
                     send(msg.chat_id_, msg.id_,
                         "⌔︙مبروك فزت ويانه وخمنت الرقم الصحيح\n⌔︙تم اضافة { 5 } من النقاط \n")
@@ -2164,7 +2136,7 @@ function Dev_planther_File(msg, data)
                     redis:incrby(bot_id .. "Status:SADD:NUM" .. msg.chat_id_ .. msg.sender_user_id_, 1)
                     if tonumber(redis:get(bot_id .. "Status:SADD:NUM" .. msg.chat_id_ .. msg.sender_user_id_)) >= 3 then
                         redis:del(bot_id .. "Status:SADD:NUM" .. msg.chat_id_ .. msg.sender_user_id_)
-                        redis:del(bot_id .. "Status:GAME:AsHMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
+                        redis:del(bot_id .. "Status:GAME:TKMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_)
                         send(msg.chat_id_, msg.id_,
                             "⌔︙اوبس لقد خسرت في اللعبه \n⌔︙حظآ اوفر في المره القادمه \n⌔︙كان الرقم الذي تم تخمينه { " ..
                                 GETNUM .. " }")
@@ -2175,7 +2147,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Status:SET:GAME" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text and text:match("^(%d+)$") then
                 local NUM = text:match("^(%d+)$")
@@ -2199,7 +2171,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status::Set:Moktlf" .. msg.chat_id_) or "") .. "" then
             if not redis:get(bot_id .. "Status:Set:Moktlf:Bot" .. msg.chat_id_) then
                 redis:del(bot_id .. "Status::Set:Moktlf" .. msg.chat_id_)
@@ -2209,7 +2181,7 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Set:Moktlf:Bot" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == "" .. (redis:get(bot_id .. "Status:Set:Amth" .. msg.chat_id_) or "") .. "" then
             if not redis:get(bot_id .. "Status:Set:Amth:Bot" .. msg.chat_id_) then
                 redis:del(bot_id .. "Status:Set:Amth" .. msg.chat_id_)
@@ -2219,7 +2191,7 @@ function Dev_planther_File(msg, data)
             end
             redis:set(bot_id .. "Status:Set:Amth:Bot" .. msg.chat_id_, true)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Status:Add:msg:user" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text and text:match("^الغاء$") then
                 redis:del(bot_id .. "id:user" .. msg.chat_id_)
@@ -2234,7 +2206,7 @@ function Dev_planther_File(msg, data)
             redis:incrby(bot_id .. "Num:Message:Userr" .. msg.chat_id_ .. ":" .. iduserr, numadded)
             send(msg.chat_id_, msg.id_, "\n⌔︙تم اضافة له - " .. numadded .. " رسائل")
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Status:games:add" .. msg.chat_id_ .. "" .. msg.sender_user_id_) then
             if text and text:match("^الغاء$") then
                 redis:del(bot_id .. "idgem:user" .. msg.chat_id_)
@@ -2248,7 +2220,7 @@ function Dev_planther_File(msg, data)
             redis:incrby(bot_id .. "Num:Add:Games" .. msg.chat_id_ .. iduserr, numadded)
             send(msg.chat_id_, msg.id_, "\n⌔︙تم اضافة له - " .. numadded .. " مجوهرات")
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if redis:get(bot_id .. "Redis:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) then
             if text == "الغاء" then
                 send(msg.chat_id_, msg.id_, "⌔︙تم الغاء حفظ القوانين")
@@ -2259,7 +2231,7 @@ function Dev_planther_File(msg, data)
             send(msg.chat_id_, msg.id_, "⌔︙تم حفظ قوانين المجموعه")
             redis:del(bot_id .. "Redis:Rules:" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text then
             local DelFilter = redis:get(bot_id .. "Filter:Reply1" .. msg.sender_user_id_ .. msg.chat_id_)
             if DelFilter and DelFilter == "DelFilter" then
@@ -2270,7 +2242,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text then
             local SetFilter = redis:get(bot_id .. "Filter:Reply1" .. msg.sender_user_id_ .. msg.chat_id_)
             if SetFilter and SetFilter == "SetFilter" then
@@ -2281,7 +2253,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text then
             local WirngFilter = redis:get(bot_id .. "Filter:Reply1" .. msg.sender_user_id_ .. msg.chat_id_)
             if WirngFilter and WirngFilter == "WirngFilter" then
@@ -2295,7 +2267,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and redis:get(bot_id .. 'GetTexting:Devplanther' .. msg.chat_id_ .. ':' .. msg.sender_user_id_) then
             if text == 'الغاء' or text == 'الغاء ✖' then
                 redis:del(bot_id .. 'GetTexting:Devplanther' .. msg.chat_id_ .. ':' .. msg.sender_user_id_)
@@ -2308,7 +2280,7 @@ function Dev_planther_File(msg, data)
             send(msg.chat_id_, msg.id_, text)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or msg.content_.audio_ or
             msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then
             local test = redis:get(bot_id .. "Text:Manager" .. msg.sender_user_id_ .. ":" .. msg.chat_id_ .. "")
@@ -2366,7 +2338,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and text:match("^(.*)$") then
             if redis:get(bot_id .. "Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
                 send(msg.chat_id_, msg.id_,
@@ -2385,7 +2357,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and text:match("^(.*)$") then
             if redis:get(bot_id .. "Set:Manager:rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_ .. "") == "true2" then
                 send(msg.chat_id_, msg.id_, "⌔︙تم حذف الرد من ردود المدير ")
@@ -2402,7 +2374,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and not redis:get(bot_id .. "Status:Reply:Manager" .. msg.chat_id_) then
             if not redis:sismember(bot_id .. 'Spam_For_Bot' .. msg.sender_user_id_, text) then
                 local anemi = redis:get(bot_id .. "Add:Rd:Manager:Gif" .. text .. msg.chat_id_)
@@ -2466,7 +2438,7 @@ function Dev_planther_File(msg, data)
                 end
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text or msg.content_.sticker_ or msg.content_.voice_ or msg.content_.animation_ or msg.content_.audio_ or
             msg.content_.document_ or msg.content_.photo_ or msg.content_.video_ then
             local test = redis:get(bot_id .. "Text:Sudo:Bot" .. msg.sender_user_id_ .. ":" .. msg.chat_id_)
@@ -2517,7 +2489,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and text:match("^(.*)$") then
             if redis:get(bot_id .. "Set:Rd" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
                 send(msg.chat_id_, msg.id_,
@@ -2528,7 +2500,7 @@ function Dev_planther_File(msg, data)
                 return false
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and text:match("^(.*)$") then
             if redis:get(bot_id .. "Set:On" .. msg.sender_user_id_ .. ":" .. msg.chat_id_) == "true" then
                 send(msg.chat_id_, msg.id_, "⌔︙تم حذف الرد من ردود المطور")
@@ -2589,13 +2561,11 @@ function Dev_planther_File(msg, data)
                 dofile("planther.lua")
                 send(msg.chat_id_, msg.id_, "⌔︙تم تحديث ملفات البوت")
             elseif text == 'تحديث السورس 🔂' then
-                download_to_file('https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua',
-                    'planther.lua')
+                download_to_file('https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua', 'planther.lua')
                 send(msg.chat_id_, msg.id_,
                     "⌔︙تم تحديث السورس وتنزيل اخر تحديث للملفات")
             elseif text == 'تحديث السورس' then
-                download_to_file('https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua',
-                    'planther.lua')
+                download_to_file('https://raw.githubusercontent.com/plantherTeam/planther/master/planther.lua', 'planther.lua')
                 send(msg.chat_id_, msg.id_,
                     "⌔︙تم تحديث السورس وتنزيل اخر تحديث للملفات")
             end
@@ -2678,7 +2648,7 @@ function Dev_planther_File(msg, data)
             end
         end
 
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and not redis:get(bot_id .. "Status:Reply:Sudo" .. msg.chat_id_) then
             if not redis:sismember(bot_id .. 'Spam_For_Bot' .. msg.sender_user_id_, text) then
                 local anemi = redis:get(bot_id .. "Add:Rd:Sudo:Gif" .. text)
@@ -2741,7 +2711,7 @@ function Dev_planther_File(msg, data)
                     redis:sadd(bot_id .. "Spam_For_Bot" .. msg.sender_user_id_, text)
                 end
             end
-            -- go fuck your self :) .
+            ------------------------------------------------------------------------------------------------------------
             if text and redis:get(bot_id .. 'Set:Cmd:Start:Bot') then
                 if text == 'الغاء ✖' then
                     send(msg.chat_id_, msg.id_, "⌔︙تم الغاء حفظ كليشه امر /start")
@@ -2753,13 +2723,13 @@ function Dev_planther_File(msg, data)
                 redis:del(bot_id .. 'Set:Cmd:Start:Bot')
                 return false
             end
-            -- go fuck your self :) .
+            ------------------------------------------------------------------------------------------------------------
         end
         if TypeForChat == ("ForUser") then
             if text == '/start' then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if Dev_planther(msg) then
@@ -3160,7 +3130,7 @@ function Dev_planther_File(msg, data)
                                         planther = ''
                                     else
                                         planther = '\n⌔︙ تم ازالة ~' .. w ..
-                                                       ' مجموعه لان البوت عضو'
+                                                     ' مجموعه لان البوت عضو'
                                     end
                                     send(msg.chat_id_, msg.id_,
                                         '*⌔︙ عدد المجموعات الان ← { ' .. #group ..
@@ -3362,7 +3332,7 @@ function Dev_planther_File(msg, data)
             if text == ("اضف مطور") and tonumber(msg.reply_to_message_id_) ~= 0 and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3380,7 +3350,7 @@ function Dev_planther_File(msg, data)
             if text == ("حذف مطور") and tonumber(msg.reply_to_message_id_) ~= 0 and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3397,7 +3367,7 @@ function Dev_planther_File(msg, data)
             if text and text:match("^اضف مطور @(.*)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3421,7 +3391,7 @@ function Dev_planther_File(msg, data)
             if text and text:match("^حذف مطور @(.*)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3441,7 +3411,7 @@ function Dev_planther_File(msg, data)
             if text and text:match("^اضف مطور (%d+)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:sadd(bot_id .. "Developer:Bot", text:match("^اضف مطور (%d+)$"))
@@ -3452,7 +3422,7 @@ function Dev_planther_File(msg, data)
             if text and text:match("^حذف مطور (%d+)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Developer:Bot", text:match("^حذف مطور (%d+)$"))
@@ -3543,7 +3513,7 @@ function Dev_planther_File(msg, data)
                 ("مسح المحظورين عام") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Removal:User:Groups")
@@ -3551,7 +3521,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المطورين") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Developer:Bot")
@@ -3560,7 +3530,7 @@ function Dev_planther_File(msg, data)
                 "مسح الاساسين" and DeveloperBot(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Basic:User" .. msg.chat_id_)
@@ -3575,7 +3545,7 @@ function Dev_planther_File(msg, data)
                     if da.status_.ID == "ChatMemberStatusCreator" then
                         if AddChannel(msg.sender_user_id_) == false then
                             send(msg.chat_id_, msg.id_,
-                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                             return false
                         end
                         redis:del(bot_id .. "Basic:User" .. msg.chat_id_)
@@ -3586,7 +3556,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المنشئين") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Constructor:Group" .. msg.chat_id_)
@@ -3594,7 +3564,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المدراء") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Manager:Group" .. msg.chat_id_)
@@ -3602,7 +3572,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح الادمنيه") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Admin:Group" .. msg.chat_id_)
@@ -3610,7 +3580,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المميزين") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Vip:Group" .. msg.chat_id_)
@@ -3634,7 +3604,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المكتومين") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Silence:User:Group" .. msg.chat_id_)
@@ -3642,7 +3612,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المقيدين") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت ??.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت ??.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Keed:User:Group" .. msg.chat_id_)
@@ -3650,7 +3620,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("مسح المحظورين") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:del(bot_id .. "Removal:User:Group" .. msg.chat_id_)
@@ -3659,7 +3629,7 @@ function Dev_planther_File(msg, data)
                 "مسح الاوامر المضافه" and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "List:ZaYon:Group:New" .. msg.chat_id_)
@@ -3672,7 +3642,7 @@ function Dev_planther_File(msg, data)
             elseif text == "مسح الصلاحيات" and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Validitys:Group" .. msg.chat_id_)
@@ -3686,7 +3656,7 @@ function Dev_planther_File(msg, data)
                 Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Removal:User:Groups")
@@ -3707,7 +3677,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("المطورين") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Developer:Bot")
@@ -3728,7 +3698,7 @@ function Dev_planther_File(msg, data)
                 DeveloperBot(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Basic:User" .. msg.chat_id_)
@@ -3755,7 +3725,7 @@ function Dev_planther_File(msg, data)
                     if da.status_.ID == "ChatMemberStatusCreator" then
                         if AddChannel(msg.sender_user_id_) == false then
                             send(msg.chat_id_, msg.id_,
-                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                             return false
                         end
                         local list = redis:smembers(bot_id .. "Basic:User" .. msg.chat_id_)
@@ -3778,7 +3748,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("المنشئين") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Constructor:Group" .. msg.chat_id_)
@@ -3798,7 +3768,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("المدراء") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Manager:Group" .. msg.chat_id_)
@@ -3819,7 +3789,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("الادمنيه") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 local list = redis:smembers(bot_id .. "Admin:Group" .. msg.chat_id_)
@@ -3940,7 +3910,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("حظر عام") and tonumber(msg.reply_to_message_id_) ~= 0 and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3965,7 +3935,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("الغاء العام") and tonumber(msg.reply_to_message_id_) ~= 0 and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3983,7 +3953,7 @@ function Dev_planther_File(msg, data)
                 PresidentGroup(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -3999,7 +3969,7 @@ function Dev_planther_File(msg, data)
                 PresidentGroup(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4014,7 +3984,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("رفع منشئ اساسي") and tonumber(msg.reply_to_message_id_) ~= 0 then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 tdcli_function({
@@ -4044,7 +4014,7 @@ function Dev_planther_File(msg, data)
                     if da.status_.ID == "ChatMemberStatusCreator" then
                         if AddChannel(msg.sender_user_id_) == false then
                             send(msg.chat_id_, msg.id_,
-                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                             return false
                         end
                         function FunctionStatus(arg, result)
@@ -4062,7 +4032,7 @@ function Dev_planther_File(msg, data)
             elseif text == "رفع منشئ" and tonumber(msg.reply_to_message_id_) ~= 0 and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4079,7 +4049,7 @@ function Dev_planther_File(msg, data)
                 BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4094,7 +4064,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("رفع مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4110,7 +4080,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("تنزيل مدير") and tonumber(msg.reply_to_message_id_) ~= 0 and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4125,7 +4095,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("رفع ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -4146,7 +4116,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("تنزيل ادمن") and tonumber(msg.reply_to_message_id_) ~= 0 and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4162,7 +4132,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("رفع مميز") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -4183,7 +4153,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("تنزيل مميز") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4198,7 +4168,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("حظر") and msg.reply_to_message_id_ ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Lock:Ban:Group" .. msg.chat_id_) then
@@ -4244,7 +4214,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("الغاء حظر") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4272,7 +4242,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("كتم") and msg.reply_to_message_id_ ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if msg.can_be_deleted_ == false then
@@ -4297,7 +4267,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("الغاء كتم") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4312,7 +4282,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("الغاء تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4334,7 +4304,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("تقيد") and tonumber(msg.reply_to_message_id_) ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4361,7 +4331,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^حظر عام @(.*)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4392,7 +4362,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء العام @(.*)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4412,7 +4382,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع منشئ اساسي @(.*)$") and PresidentGroup(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4434,7 +4404,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل منشئ اساسي @(.*)$") and PresidentGroup(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4458,7 +4428,7 @@ function Dev_planther_File(msg, data)
                     if da.status_.ID == "ChatMemberStatusCreator" then
                         if AddChannel(msg.sender_user_id_) == false then
                             send(msg.chat_id_, msg.id_,
-                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                             return false
                         end
                         function FunctionStatus(arg, result)
@@ -4489,7 +4459,7 @@ function Dev_planther_File(msg, data)
                     if da.status_.ID == "ChatMemberStatusCreator" then
                         if AddChannel(msg.sender_user_id_) == false then
                             send(msg.chat_id_, msg.id_,
-                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                                '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                             return false
                         end
                         function FunctionStatus(arg, result)
@@ -4510,7 +4480,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع منشئ @(.*)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4532,7 +4502,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل منشئ @(.*)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4550,7 +4520,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع مدير @(.*)$") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4572,7 +4542,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل مدير @(.*)$") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4590,7 +4560,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع ادمن @(.*)$") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -4617,7 +4587,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل ادمن @(.*)$") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4636,7 +4606,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع مميز @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -4663,7 +4633,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل مميز @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4793,7 +4763,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^حظر @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Lock:Ban:Group" .. msg.chat_id_) then
@@ -4845,7 +4815,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء حظر @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4877,7 +4847,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^كتم @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if msg.can_be_deleted_ == false then
@@ -4909,7 +4879,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء كتم @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -4927,7 +4897,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تقيد @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -5004,7 +4974,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء تقيد @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 function FunctionStatus(arg, result)
@@ -5028,7 +4998,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^طرد @(.*)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if msg.can_be_deleted_ == false then
@@ -5079,7 +5049,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^حظر عام (%d+)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if Dev_planther_User(text:match("^حظر عام (%d+)$")) == true then
@@ -5096,7 +5066,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء العام (%d+)$") and Dev_planther(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Removal:User:Groups", text:match("^الغاء العام (%d+)$"))
@@ -5107,7 +5077,7 @@ function Dev_planther_File(msg, data)
             if text and text:match("^رفع منشئ اساسي (%d+)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:sadd(bot_id .. "Basic:User" .. msg.chat_id_, text:match("^رفع منشئ اساسي (%d+)$"))
@@ -5116,7 +5086,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل منشئ اساسي (%d+)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Basic:User" .. msg.chat_id_, text:match("^تنزيل منشئ اساسي (%d+)$"))
@@ -5125,7 +5095,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع منشئ (%d+)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:sadd(bot_id .. "Constructor:Group" .. msg.chat_id_, text:match("^رفع منشئ (%d+)$"))
@@ -5134,7 +5104,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل منشئ (%d+)$") and BasicBuilder(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Constructor:Group" .. msg.chat_id_, text:match("^تنزيل منشئ (%d+)$"))
@@ -5143,7 +5113,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع مدير (%d+)$") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:sadd(bot_id .. "Manager:Group" .. msg.chat_id_, text:match("^رفع مدير (%d+)$"))
@@ -5152,7 +5122,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل مدير (%d+)$") and Constructor(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Manager:Group" .. msg.chat_id_, text:match("^تنزيل مدير (%d+)$"))
@@ -5161,7 +5131,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع ادمن (%d+)$") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -5175,7 +5145,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل ادمن (%d+)$") and Owner(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Admin:Group" .. msg.chat_id_, text:match("^تنزيل ادمن (%d+)$"))
@@ -5184,7 +5154,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^رفع مميز (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Cheking:Seted" .. msg.chat_id_) then
@@ -5198,7 +5168,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^تنزيل مميز (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Vip:Group" .. msg.chat_id_, text:match("^تنزيل مميز (%d+)$"))
@@ -5207,7 +5177,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^حظر (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if not Constructor(msg) and redis:get(bot_id .. "Status:Lock:Ban:Group" .. msg.chat_id_) then
@@ -5246,7 +5216,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء حظر (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if tonumber(text:match("^الغاء حظر (%d+)$")) == tonumber(bot_id) then
@@ -5268,7 +5238,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^كتم (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if Rank_Checking(text:match("^كتم (%d+)$"), msg.chat_id_) == true then
@@ -5286,7 +5256,7 @@ function Dev_planther_File(msg, data)
             elseif text and text:match("^الغاء كتم (%d+)$") and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 redis:srem(bot_id .. "Silence:User:Group" .. msg.chat_id_, text:match("^الغاء كتم (%d+)$"))
@@ -5962,7 +5932,7 @@ function Dev_planther_File(msg, data)
             elseif text == ("تثبيت") and msg.reply_to_message_id_ ~= 0 and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if redis:sismember(bot_id .. "Status:Lock:pin", msg.chat_id_) and not Constructor(msg) then
@@ -5987,7 +5957,7 @@ function Dev_planther_File(msg, data)
             elseif text == "الغاء التثبيت" and Admin(msg) then
                 if AddChannel(msg.sender_user_id_) == false then
                     send(msg.chat_id_, msg.id_,
-                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                        '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                     return false
                 end
                 if redis:sismember(bot_id .. "Status:Lock:pin", msg.chat_id_) and not Constructor(msg) then
@@ -7713,7 +7683,7 @@ function Dev_planther_File(msg, data)
                         "\n⌔︙اهلا بك عزيزي في لعبة التخمين :\nٴ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉\n" ..
                             "⌔︙ملاحظه لديك { 3 } محاولات فقط فكر قبل ارسال تخمينك \n\n" ..
                             "⌔︙سيتم تخمين عدد ما بين ال {1 و 20} اذا تعتقد انك تستطيع الفوز جرب واللعب الان ؟ ")
-                    redis:setex(bot_id .. "Status:GAME:AsHMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 100, true)
+                    redis:setex(bot_id .. "Status:GAME:TKMEN" .. msg.chat_id_ .. "" .. msg.sender_user_id_, 100, true)
                     return false
                 end
             elseif text == "محيبس" or text == "بات" then
@@ -7834,7 +7804,7 @@ function Dev_planther_File(msg, data)
 ⌔︙ارسل { م4 } ← اوامر المنشئين
 ⌔︙ارسل { م5 } ← اوامر مطورين البوت
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'م1' and Admin(msg) then
                 send(msg.chat_id_, msg.id_, [[*
@@ -7870,7 +7840,7 @@ function Dev_planther_File(msg, data)
 ⌔︙الجهات
 ⌔︙الاشعارات
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'م2' and Admin(msg) then
                 send(msg.chat_id_, msg.id_, [[*
@@ -7909,7 +7879,7 @@ function Dev_planther_File(msg, data)
 ⌔︙المطرودين ، البوتات ، الصوره
 ⌔︙الصلاحيات ، الرابط
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'م3' and Owner(msg) then
                 send(msg.chat_id_, msg.id_, [[*
@@ -7940,7 +7910,7 @@ function Dev_planther_File(msg, data)
 ⌔︙اضف ، حذف ← { رد }
 ⌔︙تنظيف ← { عدد }
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'م4' and Constructor(msg) then
                 send(msg.chat_id_, msg.id_, [[*
@@ -7959,7 +7929,7 @@ function Dev_planther_File(msg, data)
 ⌔︙الاوامر المضافه ، مسح الاوامر المضافه
 ⌔︙تنزيل جميع الرتب
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'م5' and DeveloperBot(msg) then
                 send(msg.chat_id_, msg.id_, [[*
@@ -7992,7 +7962,7 @@ function Dev_planther_File(msg, data)
 ⌔︙اذاعه ، اذاعه بالتوجيه ، اذاعه بالتثبيت
 ⌔︙اذاعه خاص ، اذاعه خاص بالتوجيه 
 ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉ ┉
-⌔︙قناة البوت ←* @planthertech
+⌔︙قناة البوت ←* @b666P
 ]])
             elseif text == 'الالعاب' then
                 send(msg.chat_id_, msg.id_, [[*
@@ -8179,7 +8149,7 @@ function Dev_planther_File(msg, data)
                                     planther = ''
                                 else
                                     planther = '\n⌔︙ تم ازالة ~' .. w ..
-                                                   ' مجموعه لان البوت عضو'
+                                                 ' مجموعه لان البوت عضو'
                                 end
                                 send(msg.chat_id_, msg.id_,
                                     '*⌔︙ عدد المجموعات الان ← { ' .. #group .. ' } مجموعه ' ..
@@ -8409,7 +8379,7 @@ function Dev_planther_File(msg, data)
                                     send(msg.chat_id_, msg.id_, "⌔︙ حساب المنشئ محذوف")
                                     return false
                                 end
-                                local UserName = (b.username_ or "planthertech")
+                                local UserName = (b.username_ or "b666P")
                                 send(msg.chat_id_, msg.id_, "⌔︙منشئ المجموعه ~ [" .. b.first_name_ ..
                                     "](T.me/" .. UserName .. ")")
                             end, nil)
@@ -8440,7 +8410,7 @@ function Dev_planther_File(msg, data)
                             send(msg.chat_id_, msg.id_, "⌔︙حساب المنشئ محذوف")
                             return false
                         end
-                        local UserName = (b.username_ or "planthertech")
+                        local UserName = (b.username_ or "b666P")
                         send(msg.chat_id_, msg.id_, "⌔︙تم ترقية منشئ المجموعه ← [" ..
                             b.first_name_ .. "](T.me/" .. UserName .. ")")
                         redis:sadd(bot_id .. "President:User" .. msg.chat_id_, b.id_)
@@ -8468,11 +8438,11 @@ function Dev_planther_File(msg, data)
                 send(msg.chat_id_, msg.id_, '⌔︙ تم حذف كليشه المطور')
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == 'تفعيل' and DeveloperBot(msg) then
             if AddChannel(msg.sender_user_id_) == false then
                 send(msg.chat_id_, msg.id_,
-                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                 return false
             end
             if TypeForChat ~= 'ForSuppur' then
@@ -8564,11 +8534,11 @@ function Dev_planther_File(msg, data)
                 end, nil)
             end, nil)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == 'تعطيل' and DeveloperBot(msg) then
             if AddChannel(msg.sender_user_id_) == false then
                 send(msg.chat_id_, msg.id_,
-                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                 return false
             end
             tdcli_function({
@@ -8619,11 +8589,11 @@ function Dev_planther_File(msg, data)
                 end, nil)
             end, nil)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text == 'تفعيل' and not DeveloperBot(msg) and not redis:get(bot_id .. 'Free:Bot') then
             if AddChannel(msg.sender_user_id_) == false then
                 send(msg.chat_id_, msg.id_,
-                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @planthertech')
+                    '\n⌔︙بليز اشترك بالقناة البوت واستخدم البوت. \n⌔︙قناة البوت 📁.\n- @b666P')
                 return false
             end
             if TypeForChat ~= 'ForSuppur' then
@@ -8735,10 +8705,10 @@ function Dev_planther_File(msg, data)
                 end, nil)
             end, nil)
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
     end
 end
--- go fuck your self :) .
+------------------------------------------------------------------------------------------------------------
 local ban_Lkid = {}
 function tdcli_update_callback(data)
     if data.ID == ("UpdateChannel") then
@@ -8787,7 +8757,7 @@ function tdcli_update_callback(data)
                 data.message_.content_.text_ = (NewCmmd or data.message_.content_.text_)
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         tdcli_function({
             ID = "GetUser",
             user_id_ = msg.sender_user_id_
@@ -8796,7 +8766,7 @@ function tdcli_update_callback(data)
                 redis:set(bot_id .. 'Save:Username' .. msg.sender_user_id_, data.username_)
             end
         end, nil)
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         if text and redis:get(bot_id .. "Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) == "true" then
             local NewCmmd = redis:get(bot_id .. "Set:Za:Group:New1" .. msg.chat_id_ .. ":" .. text)
             if NewCmmd then
@@ -8811,7 +8781,7 @@ function tdcli_update_callback(data)
             redis:del(bot_id .. "Del:Cmd:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_)
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and redis:get(bot_id .. "Set:Za:Group" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) == "true" then
             redis:set(bot_id .. "Set:Za:Group:New" .. msg.chat_id_, text)
             send(msg.chat_id_, msg.id_, "⌔︙ارسل الامر الجديد ليتم وضعه مكان القديم")
@@ -8819,7 +8789,7 @@ function tdcli_update_callback(data)
             redis:set(bot_id .. "Set:Za:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_, "true1")
             return false
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if text and redis:get(bot_id .. "Set:Za:Group1" .. msg.chat_id_ .. ":" .. msg.sender_user_id_) == "true1" then
             local NewCmd = redis:get(bot_id .. "Set:Za:Group:New" .. msg.chat_id_)
             redis:set(bot_id .. "Set:Za:Group:New1" .. msg.chat_id_ .. ":" .. text, NewCmd)
@@ -8981,7 +8951,7 @@ function tdcli_update_callback(data)
                 end
             end
         end
-        -- go fuck your self :) .
+        ------------------------------------------------------------------------------------------------------------
         if tonumber(msg.sender_user_id_) ~= tonumber(bot_id) then
             if msg.sender_user_id_ and RemovalUserGroup(msg.chat_id_, msg.sender_user_id_) then
                 KickGroup(msg.chat_id_, msg.sender_user_id_)
@@ -9031,7 +9001,7 @@ function tdcli_update_callback(data)
 
         end
 
-        -- go fuck your self :) .--
+        --------------------------------------------------------------------------------------------------------------
         Dev_planther_File(msg, data)
         FilesplantherBot(msg, data)
     elseif data.ID == ("UpdateMessageEdited") then
