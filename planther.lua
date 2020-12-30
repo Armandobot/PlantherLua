@@ -70,13 +70,13 @@ local function fuck_file()
             os.execute('lua planther.lua')
         end
         -- go fuck your self :) .
-        local Devplanther_info_bot = io.open("info_bot.lua", 'w')
-        Devplanther_info_bot:write([[
+        local Devplanther_Info_Sudo = io.open("info_bot.lua", 'w')
+Devplanther_Info_Sudo:write([[
 do 
 local planther_INFO = {
-Id_Devplanther = ]] .. redis:get(fuck .. "Id_Devplanther") .. [[,
-UserName_planther = "]] .. redis:get(fuck .. "u_planther") .. [[",
-Token_Bot = "]] .. redis:get(fuck .. "t_planther") .. [["
+Id_Devplanther = ]]..redis:get(fuck.."Id_Devplanther")..[[,
+UserName_planther = "]]..redis:get(fuck.."u_planther")..[[",
+Token_Bot = "]]..redis:get(fuck.."t_planther")..[["
 }
 return planther_INFO
 end
